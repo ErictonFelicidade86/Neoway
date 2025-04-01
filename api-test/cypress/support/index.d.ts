@@ -30,6 +30,9 @@ declare namespace Cypress {
       loginUser(email: string, password: string): Chainable<string>;
       deleteProductIfExists(nome: string, token: string): Chainable<void>;
       createProduct(produto: ProductPayload, token: string): Chainable<void> 
+
+      // FLUXO DE CRIAÇÃO DE UM CARRINHO
+      criarFluxoCarrinhoCompleto(): Chainable<void>;
     }
   }
   
