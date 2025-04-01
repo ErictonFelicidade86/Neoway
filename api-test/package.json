@@ -7,15 +7,19 @@
     "test": "yarn cypress run",
     "test:cy": "yarn cypress open",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "allure": "allure serve",
+    "allure:gene": "allure generate"
   },
   "dependencies": {
     "cypress": "^14.2.0"
   },
   "devDependencies": {
-    "cypress-plugin-api": "^2.11.2",
     "@typescript-eslint/eslint-plugin": "^8.28.0",
     "@typescript-eslint/parser": "^8.28.0",
+    "allure-commandline": "^2.33.0",
+    "allure-cypress": "^3.2.1",
+    "cypress-plugin-api": "^2.11.2",
     "eslint": "^9.23.0",
     "eslint-plugin-cypress": "^4.2.0",
     "eslint-plugin-prettier": "^5.2.5",
