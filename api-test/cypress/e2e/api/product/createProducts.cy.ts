@@ -158,7 +158,7 @@ describe('Fluxo completo: Cadastro de usuário, login e dois produtos', () => {
   });
 
   it('Deve cadastrar um novo usuário com sucesso', () => {
-    cy.createUser(payload.CarUser);
+    cy.createUserProduct(payload.CarUser);
   });
 
   describe('Cadastro de dois Produtos', () => {

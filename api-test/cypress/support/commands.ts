@@ -8,6 +8,7 @@ Cypress.Commands.add('getUserByName', (name) => {
   cy.api({
     method: 'GET',
     url: '/usuarios',
+    failOnStatusCode: false,
   }).then((res) => {
     expect(res.status).to.eq(200);
     const user = res.body.usuarios.find((u) => u.nome === name);
@@ -20,6 +21,7 @@ Cypress.Commands.add('deleteUserById', (id) => {
   cy.api({
     method: 'DELETE',
     url: `/usuarios/${id}`,
+    failOnStatusCode: false
   }).then((res) => {
     expect(res.status).to.eq(200);
     expect(res.body.message).to.eq('Registro excluído com sucesso');
@@ -113,7 +115,7 @@ Cypress.Commands.add('deleteUserIfExists', (email: string) => {
   });
 });
 
-Cypress.Commands.add('createUser', (user: UserPayload) => {
+Cypress.Commands.add('createUserProduct', (user: UserPayload) => {
   cy.api('POST', '/usuarios', user).then((res) => {
     expect(res.status).to.eq(201);
     expect(res.body.message).to.eq('Cadastro realizado com sucesso');
