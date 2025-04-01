@@ -34,3 +34,33 @@ Cypress.Commands.add('createUser', (userData, expectedStatus = 201) => {
     return res;
   });
 });
+
+// DELETANDO USUÁRIO
+Cypress.Commands.add('getRandomUser', () => {
+  return cy.api({
+    method: 'GET',
+    url: '/usuarios',
+  }).then((res) => {
+    expect(res.status).to.eq(200);
+
+    const usuarios = res.body.usuarios;
+    const usuarioAleatorio = usuarios[Math.floor(Math.random() * usuarios.length)];
+    expect(usuarioAleatorio).to.not.be.undefined;
+
+    return usuarioAleatorio;
+  });
+});
+
+Cypress.Commands.add('deleteUserById', (id: string, expectedStatus: number = 200, expectedMessage?: string) => {
+  return cy.api({
+    method: 'DELETE',
+    url: `/usuarios/${id}`,
+    failOnStatusCode: false,
+  }).then((res) => {
+    expect(res.status).to.eq(expectedStatus);
+    if (expectedMessage) {
+      expect(res.body.message).to.eq(expectedMessage);
+    }
+    return res;
+  });
+});
