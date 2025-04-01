@@ -8,6 +8,31 @@ declare namespace Cypress {
       //DELETAR USUÁRIOS
       getRandomUser(): Chainable<any>
       deleteUserById(id: string, expectedStatus?: number, expectedMessage?: string): Chainable<any>
+      
+      //EDITANDO O USUÁRIOS
+      getRandomUserId(): Chainable<string>;
+
+      getFakeEmail(): Chainable<string>;
+
+      editUser(
+          id: string,
+          body: any,
+          expectedStatus: number,
+          expectedFields?: Record<string, string>
+      ): Chainable<any>;
+      // getRandomUserId(): Chainable<string>;
+      // getFakeEmail(): Chainable<string>
+      // editUser(id: string, body: any, expectedStatus: number, expectedFields: Record<string, string>): Chainable<any>
+      // egetRandomUserId(): Chainable<string>;
+
+      // getFakeEmail(): Chainable<string>;
+  
+      // editUser(
+      //   id: string,
+      //   body: any,
+      //   expectedStatus: number,
+      //   expectedFields?: Record<string, string>
+      // ): Chainable<any>;
     }
   }
   
