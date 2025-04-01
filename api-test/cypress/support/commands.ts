@@ -37,7 +37,7 @@ Cypress.Commands.add('createUser', (userData, expectedStatus = 201) => {
 
 // DELETANDO USUÁRIO
 Cypress.Commands.add('getRandomUser', () => {
-  return cy.api({
+  cy.api({
     method: 'GET',
     url: '/usuarios',
   }).then((res) => {
@@ -52,7 +52,7 @@ Cypress.Commands.add('getRandomUser', () => {
 });
 
 Cypress.Commands.add('deleteUserById', (id: string, expectedStatus: number = 200, expectedMessage?: string) => {
-  return cy.api({
+  cy.api({
     method: 'DELETE',
     url: `/usuarios/${id}`,
     failOnStatusCode: false,
@@ -64,3 +64,41 @@ Cypress.Commands.add('deleteUserById', (id: string, expectedStatus: number = 200
     return res;
   });
 });
+
+// EDITANDO USUÁRIOS
+Cypress.Commands.add('getRandomUserId', () => {
+  cy.api({ method: 'GET', url: '/usuarios' }).then((res) => {
+    expect(res.status).to.eq(200);
+    const usuarios = res.body.usuarios;
+    const usuarioAleatorio = usuarios[Math.floor(Math.random() * usuarios.length)];
+    expect(usuarioAleatorio).to.exist;
+    return usuarioAleatorio._id;
+  });
+});
+
+Cypress.Commands.add('getFakeEmail', () => {
+  cy.api(Cypress.env('fakeBaseUrl')).then((res) => {
+    return res.body.data[0].email;
+  });
+});
+
+Cypress.Commands.add('editUser', (id, body, expectedStatus, expectedFields = {}) => {
+  cy.api({
+    method: 'PUT',
+    url: `/usuarios/${id}`,
+    body,
+    failOnStatusCode: false,
+  }).then((res) => {
+    expect(res.status).to.eq(expectedStatus);
+    for (const [key, value] of Object.entries(expectedFields)) {
+      expect(res.body[key]).to.eq(value);
+    }
+    return res;
+  });
+});
+
+
+
+
+// CRIANDO PRODUTOS
+// FLUXO DE CRIAÇÃO DO CARRINHO
