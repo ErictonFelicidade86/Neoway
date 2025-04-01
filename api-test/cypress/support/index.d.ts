@@ -1,3 +1,5 @@
+// cypress/support/index.d.ts
+/// <reference types="cypress" />
 declare namespace Cypress {
     interface Chainable {
       // CRIANDO USUÁRIOS
@@ -20,19 +22,14 @@ declare namespace Cypress {
           expectedStatus: number,
           expectedFields?: Record<string, string>
       ): Chainable<any>;
-      // getRandomUserId(): Chainable<string>;
-      // getFakeEmail(): Chainable<string>
-      // editUser(id: string, body: any, expectedStatus: number, expectedFields: Record<string, string>): Chainable<any>
-      // egetRandomUserId(): Chainable<string>;
-
-      // getFakeEmail(): Chainable<string>;
-  
-      // editUser(
-      //   id: string,
-      //   body: any,
-      //   expectedStatus: number,
-      //   expectedFields?: Record<string, string>
-      // ): Chainable<any>;
+      
+      // PRODUTOS PARA CADASTRAR
+      
+      deleteUserIfExists(email: string): Chainable<void>;
+      createUser(user: UserPayload): Chainable<void>;
+      loginUser(email: string, password: string): Chainable<string>;
+      deleteProductIfExists(nome: string, token: string): Chainable<void>;
+      createProduct(produto: ProductPayload, token: string): Chainable<void> 
     }
   }
   
