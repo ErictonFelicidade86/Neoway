@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+import { UserPayload, ProductPayload } from "./types/interface";
 
 //CUSTOM COMMANDS CRIANDO O USUÁRIO
 Cypress.Commands.add('getUserByName', (name) => {
@@ -97,8 +98,61 @@ Cypress.Commands.add('editUser', (id, body, expectedStatus, expectedFields = {})
   });
 });
 
-
-
-
 // CRIANDO PRODUTOS
+Cypress.Commands.add('deleteUserIfExists', (email: string) => {
+  cy.api('GET', '/usuarios').then((res) => {
+    const usuario = res.body.usuarios.find(
+      (u: any) => u.email.toLowerCase() === email.toLowerCase(),
+    );
+
+    if (usuario) {
+      cy.api('DELETE', `/usuarios/${usuario._id}`, { failOnStatusCode: false });
+    }
+  });
+});
+
+Cypress.Commands.add('createUser', (user: UserPayload) => {
+  cy.api('POST', '/usuarios', user).then((res) => {
+    expect(res.status).to.eq(201);
+    expect(res.body.message).to.eq('Cadastro realizado com sucesso');
+  });
+});
+
+Cypress.Commands.add('loginUser', (email: string, password: string) => {
+  return cy
+    .api('POST', '/login', { email, password })
+    .then((res) => {
+      expect(res.status).to.eq(200);
+      return res.body.authorization;
+    });
+});
+
+Cypress.Commands.add('deleteProductIfExists', (nome: string, token: string) => {
+  cy.api('GET', '/produtos').then((res) => {
+    const produto = res.body.produtos.find(
+      (p: any) => p.nome.toLowerCase() === nome.toLowerCase(),
+    );
+
+    if (produto) {
+      cy.api({
+        method: 'DELETE',
+        url: `/produtos/${produto._id}`,
+        headers: { Authorization: token },
+        failOnStatusCode: false,
+      });
+    }
+  });
+});
+
+Cypress.Commands.add('createProduct', (produto: ProductPayload, token: string) => {
+  cy.api({
+    method: 'POST',
+    url: '/produtos',
+    body: produto,
+    headers: { Authorization: token },
+  }).then((res) => {
+    expect(res.status).to.eq(201);
+    expect(res.body.message).to.eq('Cadastro realizado com sucesso');
+  });
+});
 // FLUXO DE CRIAÇÃO DO CARRINHO
