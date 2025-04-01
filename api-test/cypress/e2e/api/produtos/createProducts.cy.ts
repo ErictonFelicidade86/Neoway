@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
-import { payload } from "../../fixtures/user";
-import { carProduct } from "../../fixtures/products";
+import { payload } from '../../fixtures/user';
+import { carProduct } from '../../fixtures/products';
 
 describe('Fluxo completo: Cadastro de usuário, login e dois produtos', () => {
   let token: string;
@@ -10,14 +10,14 @@ describe('Fluxo completo: Cadastro de usuário, login e dois produtos', () => {
     cy.api({
       method: 'GET',
       url: '/usuarios',
-      failOnStatusCode: false
+      failOnStatusCode: false,
     }).then((res) => {
       expect(res.status).to.eq(200);
 
       const users = res.body.usuarios;
 
       const usuarioExistente = users.find(
-        (u) => u.email.toLowerCase() === payload.CarUser.email.toLowerCase()
+        (u) => u.email.toLowerCase() === payload.CarUser.email.toLowerCase(),
       );
 
       if (usuarioExistente) {
@@ -27,7 +27,7 @@ describe('Fluxo completo: Cadastro de usuário, login e dois produtos', () => {
         cy.api({
           method: 'DELETE',
           url: `/usuarios/${idUser}`,
-          failOnStatusCode: false
+          failOnStatusCode: false,
         }).then((resDelete) => {
           if (resDelete.status === 200) {
             cy.log('Usuário deletado com sucesso.');
@@ -48,7 +48,7 @@ describe('Fluxo completo: Cadastro de usuário, login e dois produtos', () => {
       method: 'POST',
       url: '/usuarios',
       body: payload.CarUser,
-      failOnStatusCode: false
+      failOnStatusCode: false,
     }).then((res) => {
       console.log('RESPOSTA CADASTRO USUÁRIO:', res.status, res.body);
       expect(res.status).to.eq(201);
@@ -66,7 +66,7 @@ describe('Fluxo completo: Cadastro de usuário, login e dois produtos', () => {
           email: payload.CarUser.email,
           password: payload.CarUser.password,
         },
-        failOnStatusCode: false
+        failOnStatusCode: false,
       }).then((res) => {
         expect(res.status).to.eq(200);
         token = res.body.authorization;
@@ -83,11 +83,11 @@ describe('Fluxo completo: Cadastro de usuário, login e dois produtos', () => {
         const produtos = res.body.produtos;
 
         const produto1 = produtos.find(
-          (p) => p.nome.toLowerCase() === carProduct.dataProduct_1.nome.toLowerCase()
+          (p) => p.nome.toLowerCase() === carProduct.dataProduct_1.nome.toLowerCase(),
         );
 
         const produto2 = produtos.find(
-          (p) => p.nome.toLowerCase() === carProduct.dataProduct_2.nome.toLowerCase()
+          (p) => p.nome.toLowerCase() === carProduct.dataProduct_2.nome.toLowerCase(),
         );
 
         if (produto1) {
@@ -96,7 +96,7 @@ describe('Fluxo completo: Cadastro de usuário, login e dois produtos', () => {
           cy.api({
             method: 'DELETE',
             url: `/produtos/${produto1._id}`,
-            headers: { Authorization: token }
+            headers: { Authorization: token },
           }).then((res) => {
             expect(res.status).to.eq(200);
             cy.log('Produto 1 excluído.');
@@ -110,7 +110,7 @@ describe('Fluxo completo: Cadastro de usuário, login e dois produtos', () => {
             method: 'DELETE',
             url: `/produtos/${produto2._id}`,
             headers: { Authorization: token },
-            failOnStatusCode: false
+            failOnStatusCode: false,
           }).then((res) => {
             expect(res.status).to.eq(200);
             cy.log('Produto 2 excluído.');
@@ -126,7 +126,7 @@ describe('Fluxo completo: Cadastro de usuário, login e dois produtos', () => {
         url: '/produtos',
         headers: { Authorization: token },
         body: carProduct.dataProduct_1,
-        failOnStatusCode: false
+        failOnStatusCode: false,
       }).then((res) => {
         console.log('RESPOSTA PRODUTO 1:', res.body);
         expect(res.status).to.eq(201);
@@ -141,7 +141,7 @@ describe('Fluxo completo: Cadastro de usuário, login e dois produtos', () => {
         url: '/produtos',
         headers: { Authorization: token },
         body: carProduct.dataProduct_2,
-        failOnStatusCode: false
+        failOnStatusCode: false,
       }).then((res) => {
         expect(res.status).to.eq(201);
         expect(res.body.message).to.eq('Cadastro realizado com sucesso');
@@ -149,5 +149,3 @@ describe('Fluxo completo: Cadastro de usuário, login e dois produtos', () => {
     });
   });
 });
-
-
