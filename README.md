@@ -47,3 +47,44 @@ Os arquivos abaixo contêm os **Relatório Gerado do K6**:
 
 - ✅ O projeto utiliza **K6** para testes de Performance da **API**.
 - 📂 O **docs** contêm arquivos **pdf** com os relatórios de testes.
+
+# 🚀Subindo o Projeto com Docker
+
+Este projeto está configurado com Docker Compose para facilitar a execução dos testes automatizados com Cypress e K6.
+
+📦 Passo a passo
+1. Construa os containers: 
+
+```
+docker compose up --build
+```
+
+Esse comando irá instalar todas as dependências, executar os testes automatizados e gerar os relatórios.
+
+2. Na próxima vez, basta subir normalmente
+
+```
+docker compose up
+```
+
+3. Execute com shell script
+
+```
+./scripts/run-test.sh
+```
+
+## Para visualizar a UI do Allure, conforme a imagem abaixo, execute o comando:
+
+![Allure](assets/img/allure-report.png)
+
+
+
+```
+docker compose up allure-report
+```
+
+Em seguida, acesse:
+
+```
+http://localhost:8080/
+```
