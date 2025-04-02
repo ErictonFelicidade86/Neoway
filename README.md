@@ -14,7 +14,9 @@ Os testes são organizados e documentados para garantir a qualidade do software.
 
 ---
 
-## 📄 Documentação das Sugestões de Melhorias e Cenário de Teste
+## 📄 Documentação de Sugestões de Melhorias e Cenários de Teste para o Projeto de Enriquecimento de Dados de Livros
+
+
 
 Os arquivos abaixo contêm os **cenários do desafio**:
 
@@ -22,7 +24,6 @@ Os arquivos abaixo contêm os **cenários do desafio**:
 - **api-test**: [`api-test/docs/sugestoes-melhorias.md`](api-test/docs/sugestoes-melhorias.md)
 - **api-test**: [`api-test/docs/analise-documentacao.md`](api-test/docs/analise-documentacao.md)
 - **api-test**: [`api-test/docs/cenarios.md`](api-test/docs/cenarios.md)
-- **Frontend**: [`frontend/cypress/doc/CenarioDeTeste.md`](frontend/cypress/doc/CenarioDeTeste.md)
 
 ---
 
