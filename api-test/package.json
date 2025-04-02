@@ -4,8 +4,8 @@
   "description": "Teste Automatizado com foco em API",
   "main": "index.js",
   "scripts": {
-    "test": "yarn cypress run",
-    "test:cy": "yarn cypress open",
+    "test": "cypress run",
+    "test:cy": "cypress open",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "allure": "allure serve",
