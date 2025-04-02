@@ -1,0 +1,46 @@
+services:
+  neoway-base:     # imagem comum com dependências (Cypress, K6, ts-node, etc.)
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: neoway-base
+    volumes:
+      - .:/app
+    working_dir: /app
+    entrypoint: ["tail", "-f", "/dev/null"]  # mantém esse container vivo (base)
+
+  api-test:
+    image: neoway-base
+    depends_on:
+      - neoway-base
+    entrypoint: ""
+    command: >
+      sh -c "cd /app/api-test &&
+            yarn install || true &&
+            npx cypress run || true &&
+            npx allure generate allure-results --clean -o allure-report || true &&
+            tail -f /dev/null"
+    volumes:
+      - .:/app
+    working_dir: /app/api-test
+
+  allure-report:
+      image: nginx:alpine
+      ports:
+        - "8080:80"
+      volumes:
+        - ./api-test/allure-report:/usr/share/nginx/html:ro
+        - ./scripts/wait-for-allure.sh:/wait-for-allure.sh:ro
+      entrypoint: [ "sh", "/wait-for-allure.sh" ]
+      depends_on:
+        - api-test
+
+  k6:
+    image: neoway-base
+    depends_on:
+      - neoway-base
+    entrypoint: ""
+    command: ["sh", "-c", "cd /app/k6/tests && k6 run TestPerformance.js"]
+    volumes:
+      - .:/app
+    working_dir: /app/k6/tests

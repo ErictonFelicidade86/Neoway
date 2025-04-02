@@ -1,0 +1,44 @@
+{
+  "name": "neoway-teste-tecnico",
+  "version": "1.0.0",
+  "description": "Teste Automatizado com foco em API",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress run",
+    "test:cy": "cypress open",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "allure": "allure serve",
+    "allure:gene": "allure generate"
+  },
+  "dependencies": {
+    "cypress": "^14.2.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.28.0",
+    "@typescript-eslint/parser": "^8.28.0",
+    "allure-commandline": "^2.33.0",
+    "allure-cypress": "^3.2.1",
+    "cypress-plugin-api": "^2.11.2",
+    "eslint": "^9.23.0",
+    "eslint-plugin-cypress": "^4.2.0",
+    "eslint-plugin-prettier": "^5.2.5",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.2"
+  },
+  "keywords": [
+    "Cypress",
+    "K6",
+    "API"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ErictonFelicidade86/Neoway.git"
+  },
+  "author": "Ericton Brito",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ErictonFelicidade86/Neoway/issues"
+  },
+  "homepage": "https://github.com/ErictonFelicidade86/Neoway#readme"
+}
