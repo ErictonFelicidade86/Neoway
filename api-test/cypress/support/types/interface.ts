@@ -3,12 +3,12 @@ export interface UserPayload {
     email: string;
     password: string;
     administrador: string;
-  }
+}
   
-  export interface ProductPayload {
-    nome: string;
-    preco: number;
-    descricao: string;
-    quantidade: number;
-  }
+export interface ProductPayload {
+  nome: string;
+  preco: number;
+  descricao: string;
+  quantidade: number;
+}
   
