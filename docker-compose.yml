@@ -25,15 +25,11 @@ services:
     working_dir: /app/api-test
 
   allure-report:
-      image: nginx:alpine
-      ports:
-        - "8080:80"
-      volumes:
-        - ./api-test/allure-report:/usr/share/nginx/html:ro
-        - ./scripts/wait-for-allure.sh:/wait-for-allure.sh:ro
-      entrypoint: [ "sh", "/wait-for-allure.sh" ]
-      depends_on:
-        - api-test
+    build:
+      context: .
+      dockerfile: dockerfile-allure
+    ports:
+      - "8080:80"
 
   k6:
     image: neoway-base
