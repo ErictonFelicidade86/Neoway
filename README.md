@@ -1,5 +1,3 @@
-# Neoway - Teste Técnico
-
 # Desafio
 # 🧪 Testes Automatizados - API SERVEREST
 
